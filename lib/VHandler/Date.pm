@@ -15,6 +15,15 @@ sub get_current_date {
     return ($day, $month, $year);
 }
 
+sub get_current_time {
+    my $tm = localtime;
+
+    my $hour = sprintf("%02d", $tm->hour);
+    my $min = sprintf("%02d", $tm->min);
+
+    return ($hour, $min);
+}
+
 my %month_names = (
     '1' => 'January',
     '2' => 'February',

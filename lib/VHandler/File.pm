@@ -26,4 +26,24 @@ sub create_date_dir_hierarchy {
     return $root . '/' . $year . '/' . VHandler::Date::get_month_name_by_number($month);
 }
 
+sub get_date_filename {
+    my $year = shift;
+    my $month = shift;
+    my $day = shift;
+    my $time = shift;
+
+    $year =~ s/^20+//;
+
+    my $filename = $day . '-' . $month . '-' . $year;
+
+    if ($time >= 1900) {
+        $filename .= 'e';
+    }
+    else {
+        $filename .= 'm';
+    }
+
+    return $filename . '.mp4';
+}
+
 1;

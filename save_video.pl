@@ -24,8 +24,12 @@ if (VHandler::File::exists($video_file)) {
     my $destination_dir = VHandler::File::create_date_dir_hierarchy($root, $year, $month);
     say("Dir created at $destination_dir");
 
-    move($video_file, $destination_dir);
-    say("Video file moved to destination dir");
+    my ($hour, $min) = VHandler::Date::get_current_time();
+    my $destination_file = VHandler::File::get_date_filename($year, $month, $day, $hour . $min);
+
+    my $destination = $destination_dir . '/' . $destination_file;
+    move($video_file, $destination);
+    say("Video file moved to $destination");
 }
 else {
     say('Could not find video file Untitled 01.mp4');

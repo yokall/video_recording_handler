@@ -56,6 +56,21 @@ subtest 'Create date dir hierarchy', sub {
     ok dir_exists($TEST_DIR.'/2018/March'), 'Month directory created';
 };
 
+subtest 'Get date filename', sub {
+    plan tests => 2;
+
+    my $year = '2018';
+    my $month = '03';
+    my $day = '03';
+    my $time = '1300';
+
+    is VHandler::File::get_date_filename($year, $month, $day, $time), '03-03-18m.mp4', 'Morning datetime';
+
+    my $time = '2015';
+
+    is VHandler::File::get_date_filename($year, $month, $day, $time), '03-03-18e.mp4', 'Evening datetime';
+};
+
 done_testing();
 
 sub prepare_test_dir {
