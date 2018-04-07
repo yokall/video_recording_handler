@@ -13,8 +13,4 @@ before_install:
 install:
     - cpanm -v --installdeps --notest .
 
-before_script:
-      - echo 'Europe/London' | sudo tee /etc/timezone
-      - sudo dpkg-reconfigure --frontend noninteractive tzdata
-
 script: "prove -v"
