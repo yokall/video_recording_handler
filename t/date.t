@@ -36,17 +36,14 @@ subtest 'Get current date', sub {
 subtest 'Get current time', sub {
 	plan tests => 4;
 
-	# Strange behaviour from Test::MockTime where the hour returned is 1 more than expected
-	# I checked the actual functionality with localtime and it behaved as expected
-
-	Test::MockTime::set_fixed_time('2018-04-06T13:05:00Z');
+	Test::MockTime::set_fixed_time('2018-02-06T13:05:00 GMT', '%Y-%m-%dT%H:%M:%S %Z');
 
 	my ($hour, $min) = VHandler::Date::get_current_time();
 
-	is $hour, '14', 'Hour is 14';
+	is $hour, '13', 'Hour is 14';
 	is $min, '05', 'Minute is 05';
 
-	Test::MockTime::set_fixed_time('2018-04-06T08:45:00Z');
+	Test::MockTime::set_fixed_time('2018-04-06T08:45:00 GMT', '%Y-%m-%dT%H:%M:%S %Z');
 
 	($hour, $min) = VHandler::Date::get_current_time();
 
