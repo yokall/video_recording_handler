@@ -36,18 +36,20 @@ subtest 'Get current date', sub {
 subtest 'Get current time', sub {
 	plan tests => 4;
 
-	Test::MockTime::set_fixed_time('2018-02-06T13:05:00 GMT', '%Y-%m-%dT%H:%M:%S %Z');
+	# Keep dates out of daylight saving time to prevent errors on build server
+
+	Test::MockTime::set_fixed_time('2018-02-06T13:05:00Z');
 
 	my ($hour, $min) = VHandler::Date::get_current_time();
 
-	is $hour, '13', 'Hour is 14';
+	is $hour, '13', 'Hour is 13';
 	is $min, '05', 'Minute is 05';
 
-	Test::MockTime::set_fixed_time('2018-04-06T08:45:00 GMT', '%Y-%m-%dT%H:%M:%S %Z');
+	Test::MockTime::set_fixed_time('2018-02-06T08:45:00Z');
 
 	($hour, $min) = VHandler::Date::get_current_time();
 
-	is $hour, '09', 'Hour is 09';
+	is $hour, '08', 'Hour is 08';
 	is $min, '45', 'Minute is 45';
 
 	Test::MockTime::restore();
