@@ -72,4 +72,25 @@ subtest 'Get month name from number', sub {
 	is VHandler::Date::get_month_name_by_number('12'), 'December', '12 is December';
 };
 
+subtest 'Get day of the week name', sub {
+	plan tests => 3;
+
+	check_day_of_week_name('2018-11-04T13:05:00Z', 'Sunday');
+	check_day_of_week_name('2018-06-06T13:05:00Z', 'Wednesday');
+	check_day_of_week_name('2018-06-22T13:05:00Z', 'Friday');
+};
+
+sub check_day_of_week_name {
+	my $datetime = shift;
+	my $expected_day_name = shift;
+
+	Test::MockTime::set_fixed_time($datetime);
+
+	my $day_name = VHandler::Date::get_current_day_name();
+
+	is $day_name, $expected_day_name, $datetime.' is a '.$expected_day_name;
+
+	Test::MockTime::restore();
+}
+
 done_testing();

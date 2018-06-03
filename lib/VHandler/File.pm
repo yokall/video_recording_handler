@@ -3,6 +3,8 @@ package VHandler::File;
 use strict;
 use warnings;
 
+use feature 'say';
+
 use VHandler::Date;
 
 sub exists {
@@ -41,6 +43,16 @@ sub get_date_filename {
 	}
 	else {
 		$filename .= 'm';
+	}
+
+	unless (VHandler::Date::get_current_day_name() eq 'Sunday') {
+		say('Meeting name? eg Harvest');
+		my $meeting_name = <STDIN>;
+		chomp $meeting_name;
+
+		if ($meeting_name) {
+			$filename .= '_'.$meeting_name;
+		}
 	}
 
 	return $filename.'.mp4';

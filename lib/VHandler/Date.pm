@@ -47,4 +47,22 @@ sub get_month_name_by_number {
 	return $month_names{$month_number};
 }
 
+my @day_names = (
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+);
+
+sub get_current_day_name {
+	my $tm = localtime;
+
+	my $day_name = $day_names[$tm->wday()];
+
+	return $day_name;
+}
+
 1;
