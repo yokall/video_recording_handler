@@ -8,9 +8,9 @@ perl:
   - "5.12"
 
 before_install:
-    - sudo apt-get update -q
+  - sudo apt-get update -q
 
 install:
-    - cpanm -v --installdeps --notest .
+  - cpanm -v --installdeps --notest .
 
 script: "prove -v"
