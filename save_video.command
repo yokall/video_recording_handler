@@ -34,6 +34,3 @@ if (VHandler::File::exists($video_file)) {
 else {
 	say('Could not find video file Untitled 01.mp4');
 }
-
-say "Press ENTER to exit:";
-<STDIN>;
