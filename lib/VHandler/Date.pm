@@ -47,6 +47,17 @@ sub get_month_name_by_number {
 	return $month_names{$month_number};
 }
 
+sub get_month_name_2_months_ago {
+	my $month_number = shift;
+
+	$month_number = $month_number - 2;
+	if ($month_number <= 0) {
+		$month_number = 12 + $month_number;
+	}
+
+	return get_month_name_by_number($month_number);
+}
+
 my @day_names = (
 	'Sunday',
 	'Monday',

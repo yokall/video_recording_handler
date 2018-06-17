@@ -9,8 +9,10 @@ use lib "$Bin/../lib";
 use VHandler::File;
 
 use File::Copy 'move';
+use File::Copy::Recursive 'dircopy';
 use File::Path 'rmtree';
 use File::Touch;
+use Test::File::Contents;
 use Test::Most;
 
 my $TEST_DIR = "/tmp/test";
@@ -39,6 +41,29 @@ subtest 'Move file', sub {
 	move($source_file, $destination_file);
 
 	ok file_exists($destination_file), "File moved";
+};
+
+subtest 'Copy file that already exists in destination', sub {
+	plan tests => 2;
+
+	prepare_test_dir();
+
+	my $source_dir = $TEST_DIR.'/source';
+	mkdir($source_dir);
+	my $source_file = $source_dir.'/file.txt';
+	write_to_file($source_file, 'A');
+
+	my $destination_dir = $TEST_DIR.'/dest';
+	mkdir($destination_dir);
+	my $destination_file = $destination_dir.'/file.txt';
+	write_to_file($destination_file, 'B');
+
+	$File::Copy::Recursive::CPRFComp = 1;
+	dircopy($source_dir.'/*', $destination_dir);
+
+	ok file_exists($destination_file), "File moved";
+
+	file_contents_eq $destination_file, 'A', 'Destination file contains contents of source';
 };
 
 subtest 'Create date dir hierarchy', sub {
@@ -96,4 +121,13 @@ sub dir_exists {
 	}
 
 	return 0;
+}
+
+sub write_to_file {
+	my $filename = shift;
+	my $content = shift;
+
+	open(my $fh, '>', $filename) or die "Could not open file '$filename' $!";
+	print $fh $content;
+	close $fh;
 }

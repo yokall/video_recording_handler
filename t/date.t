@@ -72,6 +72,23 @@ subtest 'Get month name from number', sub {
 	is VHandler::Date::get_month_name_by_number('12'), 'December', '12 is December';
 };
 
+subtest 'Get month name 2 months ago', sub {
+	plan tests => 12;
+
+	is VHandler::Date::get_month_name_2_months_ago('01'), 'November', '01 is November';
+	is VHandler::Date::get_month_name_2_months_ago('02'), 'December', '02 is December';
+	is VHandler::Date::get_month_name_2_months_ago('03'), 'January', '03 is January';
+	is VHandler::Date::get_month_name_2_months_ago('04'), 'February', '04 is February';
+	is VHandler::Date::get_month_name_2_months_ago('05'), 'March', '05 is March';
+	is VHandler::Date::get_month_name_2_months_ago('06'), 'April', '06 is April';
+	is VHandler::Date::get_month_name_2_months_ago('07'), 'May', '07 is May';
+	is VHandler::Date::get_month_name_2_months_ago('08'), 'June', '08 is June';
+	is VHandler::Date::get_month_name_2_months_ago('09'), 'July', '09 is July';
+	is VHandler::Date::get_month_name_2_months_ago('10'), 'August', '10 is August';
+	is VHandler::Date::get_month_name_2_months_ago('11'), 'September', '11 is September';
+	is VHandler::Date::get_month_name_2_months_ago('12'), 'October', '12 is October';
+};
+
 subtest 'Get day of the week name', sub {
 	plan tests => 3;
 
