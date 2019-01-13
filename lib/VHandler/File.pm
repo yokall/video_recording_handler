@@ -23,9 +23,9 @@ sub create_date_dir_hierarchy {
 	my $month = shift;
 
 	mkdir($root.'/'.$year);
-	mkdir($root.'/'.$year.'/'.VHandler::Date::get_month_name_by_number($month));
+	mkdir($root.'/'.$year.'/'.$month);
 
-	return $root.'/'.$year.'/'.VHandler::Date::get_month_name_by_number($month);
+	return $root.'/'.$year.'/'.$month;
 }
 
 sub get_date_filename {

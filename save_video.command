@@ -55,7 +55,7 @@ sub archive_old_video_files {
 		say("Old video dir found at $source_dir");
 
 		my $archive_root = '/Volumes/SeagateExpansion/video_files';
-		my $destination_dir = VHandler::File::create_date_dir_hierarchy($archive_root, $year, ($month - 2));
+		my $destination_dir = VHandler::File::create_date_dir_hierarchy($archive_root, $year, $old_month_name);
 		say("Archive dir created at $destination_dir");
 
 		# we copy rather than move so that any files already copied across aren't lost
