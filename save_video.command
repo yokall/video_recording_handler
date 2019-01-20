@@ -27,7 +27,8 @@ sub save_video_file {
 		say('Found video file Untitled 01.mp4');
 
 		my ($day, $month, $year) = VHandler::Date::get_current_date();
-		my $destination_dir = VHandler::File::create_date_dir_hierarchy($root, $year, $month);
+		my $month_name = get_month_name_by_number($month);
+		my $destination_dir = VHandler::File::create_date_dir_hierarchy($root, $year, $month_name);
 		say("Dir created at $destination_dir");
 
 		my ($hour, $min) = VHandler::Date::get_current_time();
