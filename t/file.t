@@ -73,7 +73,7 @@ subtest 'Create date dir hierarchy', sub {
 
 	my $root = $TEST_DIR;
 	my $year = '2018';
-	my $month = '03';
+	my $month = 'March';
 
 	VHandler::File::create_date_dir_hierarchy($root, $year, $month);
 
