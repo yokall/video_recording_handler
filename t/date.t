@@ -12,23 +12,25 @@ use Test::Most;
 use VHandler::Date;
 
 subtest 'Get current date', sub {
-	plan tests => 6;
+	plan tests => 8;
 
 	Test::MockTime::set_absolute_time('2017-11-01T00:00:00Z');
 
-	my ($day, $month, $year) = VHandler::Date::get_current_date();
+	my ($day_name, $day, $month, $year) = VHandler::Date::get_current_date();
 
 	is $year, '2017', 'Year is 2017';
 	is $month, '11', 'Month is 2017';
 	is $day, '01', 'Day is 2017';
+	is $day_name, 'Wednesday', 'Day name is Wednesday';
 
 	Test::MockTime::set_absolute_time('2202-9-11T00:00:00Z');
 
-	($day, $month, $year) = VHandler::Date::get_current_date();
+	($day_name, $day, $month, $year) = VHandler::Date::get_current_date();
 
 	is $year, '2202', 'Year is 2202';
 	is $month, '09', 'Month is 09';
 	is $day, '11', 'Day is 11';
+	is $day_name, 'Saturday', 'Day name is Saturday';
 
 	Test::MockTime::restore();
 };
@@ -88,26 +90,5 @@ subtest 'Get month name 2 months ago', sub {
 	is VHandler::Date::get_month_name_2_months_ago('11'), 'September', '11 is September';
 	is VHandler::Date::get_month_name_2_months_ago('12'), 'October', '12 is October';
 };
-
-subtest 'Get day of the week name', sub {
-	plan tests => 3;
-
-	check_day_of_week_name('2018-11-04T13:05:00Z', 'Sunday');
-	check_day_of_week_name('2018-06-06T13:05:00Z', 'Wednesday');
-	check_day_of_week_name('2018-06-22T13:05:00Z', 'Friday');
-};
-
-sub check_day_of_week_name {
-	my $datetime = shift;
-	my $expected_day_name = shift;
-
-	Test::MockTime::set_fixed_time($datetime);
-
-	my $day_name = VHandler::Date::get_current_day_name();
-
-	is $day_name, $expected_day_name, $datetime.' is a '.$expected_day_name;
-
-	Test::MockTime::restore();
-}
 
 done_testing();

@@ -86,14 +86,15 @@ subtest 'Get date filename', sub {
 
 	my $year = '2018';
 	my $month = '03';
-	my $day = '03';
+	my $day = '04';
 	my $time = '1300';
+	my $day_name = 'Sunday';
 
-	is VHandler::File::get_date_filename($year, $month, $day, $time), '03-03-18m.mp4', 'Morning datetime';
+	is VHandler::File::get_date_filename($year, $month, $day, $time, $day_name), '04-03-18m.mp4', 'Morning datetime';
 
 	$time = '2015';
 
-	is VHandler::File::get_date_filename($year, $month, $day, $time), '03-03-18e.mp4', 'Evening datetime';
+	is VHandler::File::get_date_filename($year, $month, $day, $time, $day_name), '04-03-18e.mp4', 'Evening datetime';
 };
 
 done_testing();

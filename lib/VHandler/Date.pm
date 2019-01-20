@@ -5,14 +5,25 @@ use warnings;
 
 use Time::localtime;
 
+my @day_names = (
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+);
+
 sub get_current_date {
 	my $tm = localtime;
 
 	my $day = sprintf("%02d", $tm->mday);
 	my $month = sprintf("%02d", ($tm->mon + 1));
 	my $year = $tm->year + 1900;
+	my $day_name = $day_names[$tm->wday()];
 
-	return ($day, $month, $year);
+	return ($day_name, $day, $month, $year);
 }
 
 sub get_current_time {
@@ -56,24 +67,6 @@ sub get_month_name_2_months_ago {
 	}
 
 	return get_month_name_by_number($month_number);
-}
-
-my @day_names = (
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
-);
-
-sub get_current_day_name {
-	my $tm = localtime;
-
-	my $day_name = $day_names[$tm->wday()];
-
-	return $day_name;
 }
 
 1;

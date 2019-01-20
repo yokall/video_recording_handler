@@ -26,13 +26,13 @@ sub save_video_file {
 	if (VHandler::File::exists($video_file)) {
 		say('Found video file Untitled 01.mp4');
 
-		my ($day, $month, $year) = VHandler::Date::get_current_date();
+		my ($day_name, $day, $month, $year) = VHandler::Date::get_current_date();
 		my $month_name = get_month_name_by_number($month);
 		my $destination_dir = VHandler::File::create_date_dir_hierarchy($root, $year, $month_name);
 		say("Dir created at $destination_dir");
 
 		my ($hour, $min) = VHandler::Date::get_current_time();
-		my $destination_file = VHandler::File::get_date_filename($year, $month, $day, $hour.$min);
+		my $destination_file = VHandler::File::get_date_filename($year, $month, $day, $hour.$min, $day_name);
 
 		my $destination = $destination_dir.'/'.$destination_file;
 		move($video_file, $destination);
@@ -44,7 +44,7 @@ sub save_video_file {
 }
 
 sub archive_old_video_files {
-	my ($day, $month, $year) = VHandler::Date::get_current_date();
+	my ($day_name, $day, $month, $year) = VHandler::Date::get_current_date();
 
 	my $old_month_name = VHandler::Date::get_month_name_2_months_ago($month);
 	if ($old_month_name eq 'November' || $old_month_name eq 'December') {

@@ -5,8 +5,6 @@ use warnings;
 
 use feature 'say';
 
-use VHandler::Date;
-
 sub exists {
 	my $file = shift;
 
@@ -33,6 +31,7 @@ sub get_date_filename {
 	my $month = shift;
 	my $day = shift;
 	my $time = shift;
+	my $day_name = shift;
 
 	$year =~ s/^20+//;
 
@@ -45,7 +44,7 @@ sub get_date_filename {
 		$filename .= 'm';
 	}
 
-	unless (VHandler::Date::get_current_day_name() eq 'Sunday') {
+	unless ($day_name eq 'Sunday') {
 		say('Meeting name? eg Harvest');
 		my $meeting_name = <STDIN>;
 		chomp $meeting_name;
