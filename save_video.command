@@ -59,6 +59,11 @@ sub archive_old_video_files {
 		my $destination_dir = VHandler::File::create_date_dir_hierarchy($archive_root, $year, $old_month_name);
 		say("Archive dir created at $destination_dir");
 
+		say("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+		say("X     ARCHIVING OLD FILES - MAY TAKE HOURS - LEAVE RUNNING UNTIL FINISHED      X");
+		say("X                    CTRL + SHIFT + EJECT - TURNS OFF SCREEN                   X");
+		say("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+
 		# we copy rather than move so that any files already copied across aren't lost
 		$File::Copy::Recursive::CPRFComp = 1;
 		dircopy($source_dir.'/*', $destination_dir) or die $!;
